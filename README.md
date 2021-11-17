@@ -424,7 +424,7 @@ Plutôt qu'une simple variable logique dans une condition   if  /  else  , vous 
 Les expressions de comparaison vous permettent de comparer deux valeurs par les opérateurs suivants :
 
 - ``` < ```   inférieur à ;
-- ``` <=  ```  inférieur ou égal à ;
+- ``` <= ```  inférieur ou égal à ;
 - ``` == ```   égal à ;
 - ``` >= ```   supérieur ou égal à ;
 - ```>```   supérieur à ;
@@ -458,3 +458,192 @@ if (numberOfGuests == numberOfSeats) {
 Le chaînage d'instructions permet de prévoir différents résultats en fonction des différentes situations.
 
 ### Les conditions multiple
+
+Avant de parler de contition mutiple nous devons d'abord savoir la différence entre  ```==  ou ===```
+
+En JavaScript, toutes les égalités ne sont pas nées égales :
+
+Il y a deux façons de vérifier si deux valeurs sont égales en JavaScript :  ==  et  ===, aussi appelées égalité simple et égalité stricte :
+
+- l'égalité simple vérifie la valeur, mais pas le type. Donc ceci renvoie la valeur true  :
+5 == "5"
+- par contre, l'égalité stricte vérifie à la fois la valeur et le type. Donc :
+5 === "5"
+renvoie   false  , car on compare un   number  à une   string  .
+De même, il y a deux opérateurs d'inégalité,   !=  et   !==  , avec la même distinction.
+
+### Parlons a present de condition multiple
+
+Dans certaines situations, vous souhaitez vérifier plusieurs conditions pour un même résultat ; par exemple dans la même instruction if. Pour cela, il existe des opérateurs logiques :
+
+- ``` && ``` – ET logique – pour vérifier si deux conditions sont toutes les deux vraies ;
+- ``` || ``` – OU logique – pour vérifier si au moins une condition est vraie ;
+- ``` !  ``` – NON logique – pour vérifier si une condition n'est pas vraie.
+
+```javascript
+let userLoggedIn = true;
+let UserHasPremiumAccount = true;
+let userHasMegaPremiumAccount = false;
+
+userLoggedIn && userHasPremiumAccount; // true
+userLoggedIn && userHasMegaPremiumAccount; // false
+
+userLoggedIn || userHasPremiumAccount; // true
+userLoggedIn || userHasMegaPremiumAccount; // true
+
+!userLoggedIn; // false
+!userHasMegaPremiumAccount; // true
+```
+
+### **Opérateur conditionnel '?'**
+
+Parfois, nous devons affecter une variable en fonction d'une condition.
+
+Par exemple:
+
+```javascript
+let isMajor;
+let age = 45;
+
+if (age > 18) {
+  isMajor = true;
+} else {
+  isMajor = false;
+}
+```
+
+L'opérateur dit « conditionnel » ou « point d'interrogation » nous permet de le faire de manière plus courte et plus simple.
+
+L'opérateur est représenté par un point d'interrogation ?. Parfois, on l'appelle « ternaire », car l'opérateur a trois opérandes. C'est en fait le seul et unique opérateur en JavaScript qui en a autant.
+
+La syntaxe est :
+
+```javascript
+let result = condition ? value1 : value2;
+```
+
+Le conditionest évalué : s'il est vrai alors value1est retourné, sinon – value2.
+
+Par exemple:
+```javascript
+let isMajor = (age > 18) ? true : false;
+```
+
+Techniquement, nous pouvons omettre les parenthèses autour de age > 18. L'opérateur de point d'interrogation a une faible priorité, il s'exécute donc après la comparaison >.
+
+Cet exemple fera la même chose que le précédent :
+
+```javascript
+let isMajor = age > 18 ? true : false;
+```
+
+Mais les parenthèses rendent le code plus lisible, nous vous recommandons donc de les utiliser.
+
+```javascript
+Veuillez noter:
+Dans l'exemple ci-dessus, vous pouvez éviter d'utiliser l'opérateur point d'interrogation car la comparaison elle-même renvoie true/false:
+
+let isMajor = age > 18;
+```
+
+### 1.6 Les boucles
+
+Nous avons souvent besoin de répéter des actions.
+
+Par exemple, sortir les marchandises d'une liste l'une après l'autre ou simplement exécuter le même code pour chaque numéro de 1 à 10.
+
+Les boucles sont un moyen de répéter le même code plusieurs fois.
+
+** La boucle ```<while>```
+
+La whileboucle a la syntaxe suivante :
+
+```javascript
+while (condition) {
+  // votre code ici
+}
+```
+
+Alors que le conditionest vrai, le codecorps de la boucle est exécuté.
+
+Par exemple, la boucle ci-dessous renvoie itandis quei < 3 :
+
+```javascript
+let i = 0;
+
+while (i < 3) {
+  alert( i );//affiche 0, puis 1, puis 2
+  i++;
+}
+```
+
+Une seule exécution du corps de la boucle est appelée une itération . La boucle de l'exemple ci-dessus fait trois itérations.
+
+S'il i++manquait dans l'exemple ci-dessus, la boucle se répéterait (en théorie) pour toujours. En pratique, le navigateur fournit des moyens d'arrêter de telles boucles, et en JavaScript côté serveur, nous pouvons tuer le processus.
+
+Toute expression ou variable peut être une condition de boucle, pas seulement des comparaisons : la condition est évaluée et convertie en booléen par while.
+
+Par exemple, une façon plus courte d'écrire ```while (i != 0) est while (i)```:
+
+```javascript
+let i = 3;
+while (i) { 
+    // quand i devient 0, la condition devient fausse et la boucle s'arrête
+  alert( i );
+  i--;
+}
+```
+
+**Les accolades ne sont pas nécessaires pour un corps à une seule ligne**
+
+Si le corps de la boucle a une seule instruction, nous pouvons omettre les accolades {…}:
+
+```javascript
+let i = 3;
+while (i) alert(i--);
+```
+
+**La boucle "faire... pendant"**
+
+Le contrôle de condition peut être déplacé sous le corps de la boucle à l'aide de la do..whilesyntaxe :
+
+```javascript
+do {
+  // votre code ici
+} while (condition);
+```
+
+La boucle exécutera d'abord le corps, puis vérifiera la condition et, tant qu'elle est vraie, l'exécutera encore et encore.
+
+Par exemple:
+
+```javascript
+let i = 0;
+do {
+  alert( i );
+  i++;
+} while (i < 3);
+```
+Cette forme de syntaxe ne doit être utilisée que lorsque vous souhaitez que le corps de la boucle s'exécute au moins une fois, quelle que soit la condition vraie. Habituellement, l'autre forme est préférée : ```while(…) {…}```.
+
+**La boucle "pour"**
+
+La forboucle est plus complexe, mais c'est aussi la boucle la plus couramment utilisée.
+
+Cela ressemble à ceci :
+
+```javascript
+for (debut; condition; etape) {
+  // votre code ici
+}
+```
+
+Apprenons la signification de ces parties par l'exemple. La boucle ci - dessous fonctionne alert(i) pour i de 0 jusqu'à (mais non compris) 3:
+
+```javascript
+for (let i = 0; i < 3; i++) { 
+    // affichera 0, puis 1, puis 2
+  alert(i);
+}
+```
+
